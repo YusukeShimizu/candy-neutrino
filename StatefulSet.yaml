@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: candy-neutrino
+  labels:
+    name: candy-neutrino
+spec:
+  selector:
+    matchLabels:
+      app: candy-neutrino # Label selector that determines which Pods belong to the StatefulSet
+                 # Must match spec: template: metadata: labels
+  serviceName: "candy-neutrino"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: candy-neutrino # Pod template's label selector
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: neutrino
+        envFrom:
+        - secretRef:
+            name: neutrino-secret
+        image: gcr.io/your-project-ID/candy-neutrino:latest
+        command: ["./start-neutrino.sh", "--tlsextradomain=0.0.0.0"]
+        volumeMounts:
+        - mountPath: /root/.lnd
+          name: candy-neutrino-storage
+        ports:
+        - containerPort: 9735
+        - containerPort: 10009
+        - containerPort: 8989
+  volumeClaimTemplates:
+  - metadata:
+      name: candy-neutrino-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
