@@ -45,6 +45,7 @@ DEBUG=$(set_default "$DEBUG" "debug")
 NETWORK=$(set_default "$NETWORK" "simnet")
 CHAIN=$(set_default "$CHAIN" "bitcoin")
 BACKEND="btcd"
+NEUTRINO=$(set_default "$NEUTRINO" "faucet.lightning.community")
 # So far as I know, faucet.lightning.community" are opened 
 exec lnd \
     --accept-key-send \
@@ -52,7 +53,11 @@ exec lnd \
     "--$CHAIN.active" \
     "--$CHAIN.$NETWORK" \
     "--$CHAIN.node"="neutrino" \
-    "--neutrino.connect"="faucet.lightning.community" \
+    "--neutrino.connect"="$NEUTRINO" \
+    "--neutrino.addpeer"="btcd-testnet.lightning.computer" \
+    "--neutrino.addpeer"="testnet1-btcd.zaphq.io" \
+    "--neutrino.addpeer"="testnet2-btcd.zaphq.io" \
+    "--neutrino.addpeer"="faucet.lightning.community" \
     --rpclisten="0.0.0.0:10009" \
     --listen="0.0.0.0:9735" \
     --prometheus.enable \
