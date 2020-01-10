@@ -19,7 +19,7 @@ RUN apk add --no-cache --update alpine-sdk \
     make \
     &&  cd /go/src/github.com/lightningnetwork/lnd \
     &&  make \
-    &&  make install tags="monitoring signrpc walletrpc chainrpc invoicesrpc routerrpc"
+    &&  make install tags="experimental autopilotrpc signrpc walletrpc chainrpc invoicesrpc routerrpc watchtowerrpc"
 
 
 ENV CGO_ENABLED=1

@@ -54,14 +54,9 @@ exec lnd \
     "--$CHAIN.$NETWORK" \
     "--$CHAIN.node"="neutrino" \
     "--neutrino.connect"="$NEUTRINO" \
-    "--neutrino.addpeer"="btcd-testnet.lightning.computer" \
-    "--neutrino.addpeer"="testnet1-btcd.zaphq.io" \
-    "--neutrino.addpeer"="testnet2-btcd.zaphq.io" \
-    "--neutrino.addpeer"="faucet.lightning.community" \
+    --routing.assumechanvalid \
     --rpclisten="0.0.0.0:10009" \
     --listen="0.0.0.0:9735" \
-    --prometheus.enable \
-    --prometheus.listen="0.0.0.0:8989" \
     --tlsextraip="0.0.0.0" \
     --debuglevel="$DEBUG" \
     "$@"
