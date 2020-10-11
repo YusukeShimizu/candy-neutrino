@@ -48,13 +48,11 @@ BACKEND="btcd"
 NEUTRINO=$(set_default "$NEUTRINO" "faucet.lightning.community")
 # So far as I know, faucet.lightning.community" are opened 
 exec lnd \
-    --accept-key-send \
     --logdir="/data" \
     "--$CHAIN.active" \
     "--$CHAIN.$NETWORK" \
     "--$CHAIN.node"="neutrino" \
     "--neutrino.connect"="$NEUTRINO" \
-    --routing.assumechanvalid \
     --rpclisten="0.0.0.0:10009" \
     --listen="0.0.0.0:9735" \
     --tlsextraip="0.0.0.0" \

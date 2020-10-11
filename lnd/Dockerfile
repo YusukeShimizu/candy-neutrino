@@ -1,4 +1,4 @@
-FROM golang:1.13-alpine as builder
+FROM golang:1.14.5-alpine as builder
 
 MAINTAINER bruwbird
 
@@ -19,7 +19,7 @@ RUN apk add --no-cache --update alpine-sdk \
     make \
     &&  cd /go/src/github.com/lightningnetwork/lnd \
     &&  make \
-    &&  make install tags="experimental autopilotrpc signrpc walletrpc chainrpc invoicesrpc routerrpc watchtowerrpc"
+    &&  make install tags="signrpc walletrpc chainrpc invoicesrpc"
 
 
 ENV CGO_ENABLED=1
